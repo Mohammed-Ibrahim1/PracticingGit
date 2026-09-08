@@ -18,14 +18,22 @@ services.AddLogging(config =>
 services.AddSingleton<IConfiguration>(configuration);
 
 var serviceProvider = services.BuildServiceProvider();
-var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
-logger.LogInformation("Application started");
-logger.LogInformation("Configuration loaded from appsettings.json");
 
 // Use configuration example
 var allowedHosts = configuration["AllowedHosts"];
-logger.LogInformation("AllowedHosts: {AllowedHosts}", allowedHosts);
 
 // Cleanup
 await serviceProvider.DisposeAsync();
+
+var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+Console.WriteLine($"Environment Name: {appSettings.EnvironmentName}");
+Console.WriteLine($"Greeting: {appSettings.Greeting}");
+Console.WriteLine($"Password: {appSettings.Password}");
+
+public sealed class AppSettings
+{
+    public string EnvironmentName { get; set; } = string.Empty;
+    public string Greeting { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+}
