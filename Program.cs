@@ -1,48 +1,22 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using System ;
 
-// Build configuration from appsettings.json
-var configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .Build();
-
-// Setup dependency injection
-var services = new ServiceCollection();
-services.AddLogging(config =>
+namespace Practice
 {
-    config.AddConsole();
-    config.AddConfiguration(configuration.GetSection("Logging"));
-});
-services.AddSingleton<IConfiguration>(configuration);
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var Employee = new clsEmployee();
+            Employee.Fullname = "John Doe";
+            Console.WriteLine(Employee.Fullname);
+        }
+    }
 
-var serviceProvider = services.BuildServiceProvider();
 
 
-// Use configuration example
-var allowedHosts = configuration["AllowedHosts"];
 
-// Cleanup
-await serviceProvider.DisposeAsync();
 
-var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
-Console.WriteLine($"Environment Name: {appSettings.EnvironmentName}");
-Console.WriteLine($"Greeting: {appSettings.Greeting}");
-Console.WriteLine($"Password: {appSettings.Pasword}");
-Console.WriteLine($"Max Number: {appSettings.MaxNumber}");
 
-var  p  = new Person();
-p.Age = 30;
-p.Name = "Mohammed";
-p.ID  =100;
 
-Console.WriteLine(p.Age);
-public sealed class AppSettings
-{
-    public string EnvironmentName { get; set; } = string.Empty;
-    public string Greeting { get; set; } = string.Empty;
-    public string Pasword { get; set; } = string.Empty;
 
-    public int MaxNumber { get; set; } 
 }

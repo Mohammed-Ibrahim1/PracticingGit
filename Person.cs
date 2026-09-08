@@ -1,12 +1,12 @@
-public class Person
+public class clsEmployee
 {
-    
-public int Age { get; set; }
+    public string Fullname { get; set; } = string.Empty;
+    public int Age { get; set; }
+    private string _ID ;
 
-public string FirstName { get; set; } = string.Empty;
-
-public int ID  { get; set; }
-
-public string LastName { get; set; } = string.Empty;
-
+    public string ID
+    {
+        get {return _ID; }
+        set {_ID  = value;}
+    }
 }
