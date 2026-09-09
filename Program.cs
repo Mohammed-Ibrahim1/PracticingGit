@@ -29,11 +29,16 @@ await serviceProvider.DisposeAsync();
 var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
 Console.WriteLine($"Environment Name: {appSettings.EnvironmentName}");
 Console.WriteLine($"Greeting: {appSettings.Greeting}");
-Console.WriteLine($"Password: {appSettings.Password}");
+Console.WriteLine($"Password: {appSettings.Pasword}");
 
+var  p  = new Person();
+p.Age = 30;
+p.ID  =100;
+
+Console.WriteLine(p.Age);
 public sealed class AppSettings
 {
     public string EnvironmentName { get; set; } = string.Empty;
     public string Greeting { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public string Pasword { get; set; } = string.Empty;
 }
